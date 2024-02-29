@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.canvas.Canvas?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.diplomproject.HelloController">
+    <children>
+        <AnchorPane layoutX="183.0" layoutY="232.0" prefWidth="360.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label alignment="CENTER" text="Logic Gates" textAlignment="CENTER" AnchorPane.leftAnchor="58.0" AnchorPane.topAnchor="30.0">
+                    <font>
+                        <Font size="32.0" />
+                    </font>
+                </Label>
+               <!-- <ImageView fitHeight="63.0" fitWidth="38.0" AnchorPane.rightAnchor="58.0" AnchorPane.topAnchor="20.0">
+                    <image>
+                        <Image url="lgLogo.png" />
+                    </image>
+                </ImageView>-->
+                <Button fx:id="INV_button" onAction="#handle_INV_button_click"  alignment="BOTTOM_CENTER" layoutY="100.0"
+                        mnemonicParsing="false" prefHeight="180.0" prefWidth="180.0" text="INV"
+                        AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="100.0">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets></Button>
+                <Button alignment="BOTTOM_CENTER" layoutX="180.0" layoutY="100.0" mnemonicParsing="false" prefHeight="180.0" prefWidth="180.0" text="AND" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets></Button>
+                <Button alignment="BOTTOM_CENTER" layoutY="280.0" minHeight="180.0" minWidth="180.0" mnemonicParsing="false" text="NAND" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="280.0">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets></Button>
+                <Button alignment="BOTTOM_CENTER" layoutY="280.0" mnemonicParsing="false" prefHeight="180.0" prefWidth="180.0" text="OR" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="280.0">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets></Button>
+                <Button alignment="BOTTOM_CENTER" layoutY="460.0" minHeight="180.0" minWidth="180.0" mnemonicParsing="false" text="NOR" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="460.0">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets></Button>
+                <Button alignment="BOTTOM_CENTER" layoutY="460.0" mnemonicParsing="false" prefHeight="180.0" prefWidth="180.0" text="XOR" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="460.0">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets></Button>
+                <Button alignment="BOTTOM_CENTER" layoutY="640.0" minHeight="180.0" minWidth="180.0" mnemonicParsing="false" text="MOD" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="640.0">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets></Button>
+                <Button alignment="BOTTOM_CENTER" layoutY="640.0" mnemonicParsing="false" prefHeight="180.0" prefWidth="180.0" text="IF" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="640.0">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets></Button>
+                <ComboBox layoutX="105.0" layoutY="851.0" prefHeight="40.0" prefWidth="245.0" promptText="Стандартные" AnchorPane.leftAnchor="58.0" AnchorPane.topAnchor="850.0" />
+                <ComboBox layoutX="58.0" layoutY="908.0" prefHeight="40.0" prefWidth="245.0" promptText="Колличество переменных" AnchorPane.leftAnchor="58.0" AnchorPane.topAnchor="920.0" />
+            </children>
+        </AnchorPane>
+        <AnchorPane prefHeight="100.0" prefWidth="1080.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <TextField minHeight="40.0" minWidth="300.0" promptText="Наименование переменной" AnchorPane.leftAnchor="390.0" AnchorPane.rightAnchor="390.0" AnchorPane.topAnchor="30.0" />
+                <ComboBox fx:id="numbers_of_inputs" onAction="#handleComboBoxSelection" layoutX="62.0" layoutY="34.0" prefHeight="40.0" prefWidth="300.0" promptText="Количество входов" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="750.0" AnchorPane.topAnchor="30.0" />
+                <Button layoutX="750.0" layoutY="38.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Соединить" textAlignment="CENTER" AnchorPane.leftAnchor="735.0" AnchorPane.topAnchor="30.0" />
+                <Button layoutX="865.0" layoutY="38.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" AnchorPane.leftAnchor="870.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="30.0">
+                    <graphic>
+                        <!--<ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="open_file_icon.png" />
+                            </image>
+                        </ImageView>-->
+                    </graphic>
+                </Button>
+                <Button layoutX="931.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" AnchorPane.leftAnchor="940.0" AnchorPane.topAnchor="30.0">
+                    <graphic>
+                        <!--<ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="save_file_icon.png" />
+                            </image>
+                        </ImageView>-->
+                    </graphic>
+                </Button>
+                <Button layoutX="1007.0" layoutY="24.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" AnchorPane.leftAnchor="1010.0" AnchorPane.topAnchor="30.0">
+                    <graphic>
+                        <!--<ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="clear_all_icon.png" />
+                            </image>
+                        </ImageView>-->
+                    </graphic>
+                </Button>
+            </children>
+        </AnchorPane>
+
+        <ScrollPane fx:id="scrollPane" layoutX="360.0" layoutY="100.0" prefHeight="864.0" prefWidth="1080.0"
+                    AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="0.0"
+                    AnchorPane.topAnchor="100.0">
+            <content>
+                <AnchorPane>
+                    <Canvas fx:id="canvas" width="1080" height="864" />
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+
+        <AnchorPane layoutX="360.0" layoutY="964.0" prefHeight="60.0" prefWidth="1080.0">
+            <children>
+                <TextField text="Готовое решение" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
