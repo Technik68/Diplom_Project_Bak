@@ -98,8 +98,7 @@ class INV_element implements Action {
     }
 
     // Метод для обработки события клика мыши
-    private boolean isFirstClick = true; // Флаг для отслеживания первого клика
-
+    public boolean isFirstClick = true; // Флаг для отслеживания первого клика
     private void handleClick(MouseEvent event, GraphicsContext gc) {
         double clickX = event.getX();
         double clickY = event.getY();
@@ -117,7 +116,8 @@ class INV_element implements Action {
                 // Удаляем отрисовку текущего прямоугольника
                 removeCurrentRectangle(gc);
                 // Отрисовываем новый прямоугольник и передаем объект события MouseEvent
-                drawNewRectangle(gc, clickX - rectangleWidth / 2, clickY - rectangleHeight / 2);
+                //drawNewRectangle(gc, clickX - rectangleWidth / 2, clickY - rectangleHeight / 2);
+                drawElement(gc, clickX *2, clickY *2);
                 isFirstClick = true; // Сбрасываем флаг для следующего клика
             }
         }
@@ -125,23 +125,21 @@ class INV_element implements Action {
 
     // Метод для удаления отрисовки текущего прямоугольника
     private void removeCurrentRectangle(GraphicsContext gc) {
-        gc.clearRect(RectangleX-100, RectangleY-100, rectangleWidth+100, rectangleHeight+100);
+        gc.clearRect(RectangleX-10, RectangleY-10, rectangleWidth+20, rectangleHeight+20);
+
     }
 
-    // Метод для отрисовки нового прямоугольника
-    private void drawNewRectangle(GraphicsContext gc, double newX, double newY) {
-        // Определяем координаты левого верхнего угла очищаемой области
-        double clearX = newX - 100;
-        double clearY = newY - 100;
+    public boolean isClicked(double mouseX, double mouseY) {
+        // Предположим, что x и y - это координаты верхнего левого угла элемента,
+        // а width и height - его ширина и высота соответственно.
 
-        // Очищаем область с учетом добавленных 50 пикселей
-        gc.clearRect(clearX, clearY, rectangleWidth + 100, rectangleHeight + 100);
+        // Проверяем, находится ли клик в пределах горизонтальной границы элемента
+        boolean withinXBounds = mouseX >= RectangleY && mouseX <= (RectangleX + rectangleWidth);
 
-        // Отрисовываем новый прямоугольник
-        gc.strokeRect(newX, newY, rectangleWidth, rectangleHeight);
+        // Проверяем, находится ли клик в пределах вертикальной границы элемента
+        boolean withinYBounds = mouseY >= RectangleY && mouseY <= (RectangleY + rectangleHeight);
 
-        // Обновляем координаты прямоугольника
-        RectangleX = newX;
-        RectangleY = newY;
+        // Если клик находится в пределах обеих границ, возвращаем true, иначе - false
+        return withinXBounds && withinYBounds;
     }
 }

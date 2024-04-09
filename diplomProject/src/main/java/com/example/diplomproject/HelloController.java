@@ -12,12 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.scene.input.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,24 +118,42 @@ public class HelloController {
         }
     }
 
-    private int selectedClickNumberOfInputs; // Возможно будет не нужно
-
-    private void handleCanvasClick(javafx.scene.input.MouseEvent mouseEvent) {
+    private boolean isFirstClick = false;
+    public boolean input_value=false;
+    public void handleCanvasClick(javafx.scene.input.MouseEvent mouseEvent) {
         double mouseX = mouseEvent.getX(); // Получаем координату X щелчка мыши
+        double mouseY = mouseEvent.getY();
         double lineSpacing = canvas.getHeight() / (selectedNumbersOfInputs + 70);
-
-        // Проверяем, был ли клик в пределах какой-либо вертикальной линии
-        for (int i = 1; i <= selectedNumbersOfInputs * 2; i++) {
-            double y = i * lineSpacing;
-            double lineX = y; // X-координата вертикальной линии
-
-            // Проверяем, попадает ли координата X щелчка мыши в пределы вертикальной линии
-            if (Math.abs(mouseX - lineX) < 5) { // Здесь 5 - это допустимый зазор
-
-                System.out.println("Clicked on line " + i + ", value: " + firstValues[i - 1]);
-                break; // Мы нашли линию, поэтому нет смысла продолжать проверку
+        int i=1;
+        if(!isFirstClick){
+            // Проверяем, был ли клик в пределах какой-либо вертикальной линии
+            for (i = 1; i <= selectedNumbersOfInputs * 2; i++) {
+                double y = i * lineSpacing;
+                double lineX = y; // X-координата вертикальной линии
+                // Проверяем, попадает ли координата X щелчка мыши в пределы вертикальной линии
+                if (Math.abs(mouseX - lineX) < 5) { // Здесь 5 - это допустимый зазор\
+                    System.out.println("Clicked on line " + i + ", value: " + firstValues[i - 1]);
+                    input_value=firstValues[i-1];
+                    break; // Мы нашли линию, поэтому нет смысла продолжать проверку
+                }
             }
+            isFirstClick =true;
         }
+        else {
+                System.out.println("value: " + input_value);
+                //Проверяем, был ли клик в пределах какого либо INV_elements
+                for (int j = 0; j < invElements.size(); j++) {
+                    INV_element invElement = invElements.get(j);
+                    if (invElement.isClicked(mouseX, mouseY)) {
+                        System.out.println("Clicked on INV_element " + (j + 1));
+                        invElement.getInputValue(new boolean[]{input_value});
+                        invElement.calculateOutput();
+                        invElement.printFormula();
+                        break;
+                    }
+                }
+                isFirstClick = false;
+            }
     }
 
 
@@ -166,9 +179,12 @@ public class HelloController {
 
         // Получаем GraphicsContext из Canvas
         GraphicsContext gc = canvas.getGraphicsContext2D();
-
         // Рисуем элемент на Canvas
         NewInvElement.drawElement(gc, canvas.getWidth(), canvas.getHeight());
+    }
 
+    public void handle_connect_elements() {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.getCanvas().setOnMouseClicked(mouseEvent -> handleCanvasClick(mouseEvent));
     }
 }
